@@ -3,6 +3,7 @@ from tqdm import tqdm
 import requests
 import re
 import os
+import os.path #Added this import for absolute path
 
 banner = (r'''
 
@@ -26,10 +27,12 @@ def main():
                     video_url = re.search(r'hd_src:"(.+?)"', html).group(1)
                     file_size_request = requests.get(video_url, stream=True)
                     file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024 
+                    block_size = 1024
+                    save_path = "./Downloads/" #Added download/save path
                     filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+                    complete_filename = os.path.join(save_path, filename) #Added absolute path
                     t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(filename + '.mp4', 'wb') as f:
+                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
                         for data in file_size_request.iter_content(block_size):
                             t.update(len(data))
                             f.write(data)
@@ -41,10 +44,12 @@ def main():
                     video_url = re.search(r'sd_src:"(.+?)"', html).group(1)
                     file_size_request = requests.get(video_url, stream=True)
                     file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024 
+                    block_size = 1024
+                    save_path = "./Downloads/" #Added download/save path
                     filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+                    complete_filename = os.path.join(save_path, filename) #Added absolute path
                     t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(filename + '.mp4', 'wb') as f:
+                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
                         for data in file_size_request.iter_content(block_size):
                             t.update(len(data))
                             f.write(data)
@@ -59,10 +64,12 @@ def main():
                     video_url = re.search(r'sd_src:"(.+?)"', html).group(1)
                     file_size_request = requests.get(video_url, stream=True)
                     file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024 
+                    block_size = 1024
+                    save_path = "./Downloads/" #Added download/save path
                     filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+                    complete_filename = os.path.join(save_path, filename) #Added absolute path
                     t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(filename + '.mp4', 'wb') as f:
+                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
                         for data in file_size_request.iter_content(block_size):
                             t.update(len(data))
                             f.write(data)
@@ -79,10 +86,12 @@ def main():
                     video_url = re.search(r'hd_src:"(.+?)"', html).group(1)
                     file_size_request = requests.get(video_url, stream=True)
                     file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024 
+                    block_size = 1024
+                    save_path = "./Downloads/" #Added download/save path
                     filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+                    complete_filename = os.path.join(save_path, filename) #Added absolute path
                     t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(filename + '.mp4', 'wb') as f:
+                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
                         for data in file_size_request.iter_content(block_size):
                             t.update(len(data))
                             f.write(data)
