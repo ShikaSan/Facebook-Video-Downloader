@@ -8,7 +8,8 @@ Taken from the original source:
 ## Git Installation
 ```
 # clone the repo
-$ git clone https://github.com/sameera-madushan/Facebook-Video-Downloader.git
+$ git clone https://github.com/sameera-madushan/Facebook-Video-Downloader.git - FOR THE ORIGINAL 
+$ git clone https://github.com/ShikaSan/Facebook-Video-Downloader.git - FOR THIS FORK
 
 # change the working directory to Facebook-Video-Downloader
 $ cd Facebook-Video-Downloader
