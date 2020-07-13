@@ -17,63 +17,56 @@ banner = (r'''
 
 print(banner)
 
+def download_hd(html_var):
+    print("\nDownloading the video in HD quality... \n")
+    video_url = re.search(r'hd_src:"(.+?)"', html_var).group(1)
+    file_size_request = requests.get(video_url, stream=True)
+    file_size = int(file_size_request.headers['Content-Length'])
+    block_size = 1024
+    save_path = "./Downloads/" #Added download/save path
+    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+    complete_filename = os.path.join(save_path, filename) #Added absolute path
+    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
+    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
+        for data in file_size_request.iter_content(block_size):
+            t.update(len(data))
+            f.write(data)
+    t.close()
+
+def download_sd(html_var):
+    print("\nDownloading the video in SD quality... \n")
+    video_url = re.search(r'sd_src:"(.+?)"', html_var).group(1)
+    file_size_request = requests.get(video_url, stream=True)
+    file_size = int(file_size_request.headers['Content-Length'])
+    block_size = 1024
+    save_path = "./Downloads/" #Added download/save path
+    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
+    complete_filename = os.path.join(save_path, filename) #Added absolute path
+    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
+    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
+        for data in file_size_request.iter_content(block_size):
+            t.update(len(data))
+            f.write(data)
+    t.close()
+
 def main():
     try:
         if len(list) == 2:
             if 0 in list and 1 in list:
                 _input_1 = str(input("\nPress 'A' to download the video in HD quality.\nPress 'B' to download the video in SD quality.\n: ")).upper()
                 if _input_1 == 'A':
-                    print("\nDownloading the video in HD quality... \n")
-                    video_url = re.search(r'hd_src:"(.+?)"', html).group(1)
-                    file_size_request = requests.get(video_url, stream=True)
-                    file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024
-                    save_path = "./Downloads/" #Added download/save path
-                    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
-                    complete_filename = os.path.join(save_path, filename) #Added absolute path
-                    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
-                        for data in file_size_request.iter_content(block_size):
-                            t.update(len(data))
-                            f.write(data)
-                    t.close()
+                    download_hd(html)
                     print("\nVideo downloaded successfully.")   
 
                 if _input_1 == 'B':
-                    print("\nDownloading the video in SD quality... \n")
-                    video_url = re.search(r'sd_src:"(.+?)"', html).group(1)
-                    file_size_request = requests.get(video_url, stream=True)
-                    file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024
-                    save_path = "./Downloads/" #Added download/save path
-                    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
-                    complete_filename = os.path.join(save_path, filename) #Added absolute path
-                    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
-                        for data in file_size_request.iter_content(block_size):
-                            t.update(len(data))
-                            f.write(data)
-                    t.close()
+                    download_sd(html)
                     print("\nVideo downloaded successfully.")   
 
         if len(list) == 2:
             if 1 in list and 2 in list:
                 _input_2 = str(input("\nOops! The video is not available in HD quality. Would you like to download it? ('Y' or 'N'): ")).upper()
                 if _input_2 == 'Y':
-                    print("\nDownloading the video in SD quality... \n")
-                    video_url = re.search(r'sd_src:"(.+?)"', html).group(1)
-                    file_size_request = requests.get(video_url, stream=True)
-                    file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024
-                    save_path = "./Downloads/" #Added download/save path
-                    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
-                    complete_filename = os.path.join(save_path, filename) #Added absolute path
-                    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
-                        for data in file_size_request.iter_content(block_size):
-                            t.update(len(data))
-                            f.write(data)
-                    t.close()
+                    download_sd(html)
                     print("\nVideo downloaded successfully.")
                 if _input_2 == 'N':
                     exit()
@@ -82,20 +75,7 @@ def main():
             if 0 in list and 3 in list:
                 _input_2 = str(input("\nOops! The video is not available in SD quality. Would you like to download it? ('Y' or 'N'): \n")).upper()
                 if _input_2 == 'Y':
-                    print("\nDownloading the video in HD quality... \n")
-                    video_url = re.search(r'hd_src:"(.+?)"', html).group(1)
-                    file_size_request = requests.get(video_url, stream=True)
-                    file_size = int(file_size_request.headers['Content-Length'])
-                    block_size = 1024
-                    save_path = "./Downloads/" #Added download/save path
-                    filename = datetime.strftime(datetime.now(), '%Y-%m-%d-%H-%M-%S')
-                    complete_filename = os.path.join(save_path, filename) #Added absolute path
-                    t=tqdm(total=file_size, unit='B', unit_scale=True, desc=filename, ascii=True)
-                    with open(complete_filename + '.mp4', 'wb') as f: #changed filename to the absolute path variable
-                        for data in file_size_request.iter_content(block_size):
-                            t.update(len(data))
-                            f.write(data)
-                    t.close()
+                    download_hd(html)
                     print("\nVideo downloaded successfully.")
                 if _input_2 == 'N':
                     exit()
